@@ -113,7 +113,7 @@
         </group>
       </else-if>
       <else-if type="thesis" match="any">
-        <text variable="title" text-case="capitalize-first" quotes="true"/>
+        <text variable="title" text-case="capitalize-first" quotes="true" suffix=", "/>
         <text variable="genre" suffix=", "/>
       </else-if>
       <else-if type="manuscript" match="any">
@@ -168,7 +168,7 @@
             <text variable="locator"/>
           </group>
           <group>
-            <text variable="number-of-pages" suffix="&amp;#8239;"/>
+            <text variable="number-of-pages" suffix="&amp;#160;"/>
             <label variable="number-of-pages" form="short"/>
           </group>
         </group>
@@ -184,7 +184,7 @@
             <text variable="locator"/>
           </group>
           <group>
-            <text variable="number-of-pages" suffix="&amp;#8239;"/>
+            <text variable="number-of-pages" suffix="&amp;#160;"/>
             <label variable="number-of-pages" form="short"/>
           </group>
         </group>
@@ -198,16 +198,16 @@
           </group>
           <group>
             <label variable="page" form="short"/>
-            <text variable="page" prefix="p.&amp;#8239;"/>
+            <text variable="page" prefix="&amp;#160;"/>
           </group>
         </group>
       </else-if>
-      <else-if type="article-magazine article-newspaper article-journal" match="any">
+      <else-if type="article-magazine article-newspaper article-journal article" match="any">
         <choose>
           <if match="any" is-numeric="page">
             <group>
               <label variable="page" form="short"/>
-              <text variable="page" prefix="&amp;#8239;"/>
+              <text variable="page" prefix="&amp;#160;"/>
             </group>
           </if>
           <else>
@@ -218,10 +218,12 @@
     </choose>
   </macro>
   <macro name="collection">
-    <group delimiter=", " prefix="(coll. " suffix=")">
+    <group delimiter=" ">
       <text variable="collection-title" font-weight="normal"/>
+      <group>
+      <text term="issue" form="short"  prefix=" " suffix=" "/>
       <text variable="collection-number"/>
-    </group>
+      </group>    </group>
   </macro>
   <macro name="edition">
     <choose>
@@ -324,7 +326,7 @@
   <bibliography>
     <sort>
       <key macro="author" names-min="3" names-use-first="3"/>
-      <key variable="issued" sort="descending"/>
+      <key variable="issued" sort="ascending"/>
       <key variable="page-first"/>
       <key variable="title"/>
     </sort>
@@ -333,13 +335,13 @@
         <text macro="author-bib"/>
       </group>
       <group display="left-margin">
-        <text macro="year-date" suffix="&amp;#160;:&amp;#8194;"/>
+        <text macro="year-date" suffix="&amp;#160;: "/>
       </group>
       <group delimiter=", ">
         <text macro="title"/>
         <text macro="edition"/>
-        <text macro="publisher"/>
         <text macro="collection"/>
+        <text macro="publisher"/>
         <text macro="vol-pages"/>
       </group>
     </layout>
